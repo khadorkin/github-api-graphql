@@ -1,0 +1,7 @@
+{
+  "name": "graphql-github-js",
+  "description": "GraphQL overlay for GitHub",
+  "repository": "https://github.com/rportugal/graphql-github-js",
+  "logo": "https://node-js-sample.herokuapp.com/node.png",
+  "keywords": ["node", "express", "graphql", "github"]
+}
