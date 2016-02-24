@@ -1,0 +1,38 @@
+{
+  "name": "graphql-github-js",
+  "version": "0.0.1",
+  "description": "GraphQL overlay for GitHub",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node src/cloud/main.js",
+    "update-schema": "babel-node ./scripts/updateSchema.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "babel": {
+    "optional": [
+      "runtime",
+      "es7.asyncFunctions"
+    ]
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://github.com/rportugal/graphql-github-js",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "ejs": "^2.4.1",
+    "express": "^4.13.3",
+    "express-graphql": "^0.4.9",
+    "express-partials": "^0.3.0",
+    "express-session": "^1.13.0",
+    "graphql": "^0.4.17",
+    "method-override": "^2.3.5",
+    "passport": "^0.3.2",
+    "passport-github2": "^0.1.9",
+    "react": "^0.14.5",
+    "restler": "^3.1.0"
+  },
+  "devDependencies": {
+    "babel": "^5.8.3",
+    "babel-runtime": "^5.8.34"
+  }
+}

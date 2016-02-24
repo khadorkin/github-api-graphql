@@ -1,0 +1,7 @@
+{
+  user(userName: "rportugal") {
+        name
+        company
+        hireable
+    }
+}
