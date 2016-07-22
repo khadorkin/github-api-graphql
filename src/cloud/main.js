@@ -1,16 +1,16 @@
-import express from "express";
-import graphqlHTTP from "express-graphql";
-var passport = require('passport');
-var session = require('express-session');
-var bodyParser = require('body-parser');
-var methodOverride = require('method-override');
-import { Strategy as GitHubStrategy } from "passport-github2";
-import githubSchema from "../schema";
-var partials = require('express-partials');
+import express from 'express';
+import graphqlHTTP from 'express-graphql';
+const passport = require('passport');
+const session = require('express-session');
+const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+import { Strategy as GitHubStrategy } from 'passport-github2';
+import githubSchema from '../schema';
+const partials = require('express-partials');
 
 const app = express();
 
-//process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -23,7 +23,7 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new GitHubStrategy({
   clientID: process.env.GITHUB_CLIENT_ID,
   clientSecret: process.env.GITHUB_CLIENT_SECRET,
-  callbackURL: "http://127.0.0.1:3000/auth/github/callback"
+  callbackURL: 'http://127.0.0.1:3000/auth/github/callback'
 },
 function(accessToken, refreshToken, profile, done) {
     process.nextTick(function () {
@@ -65,7 +65,7 @@ app.get('/logout', function(req, res){
 
 app.all('/graphql', (req, res) => res.redirect('/'));
 
-app.use("/", ensureAuthenticated, graphqlHTTP(req => ({
+app.use('/', ensureAuthenticated, graphqlHTTP(req => ({
   schema: githubSchema,
   graphiql: true,
   pretty: true,

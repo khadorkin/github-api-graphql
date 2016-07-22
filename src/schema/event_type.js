@@ -1,14 +1,15 @@
 import {
-  GraphQLInt,
-  GraphQLString
-} from "graphql";
+  GraphQLString,
+  GraphQLBoolean,
+  GraphQLObjectType,
+} from 'graphql';
 
-var eventType = new GraphQLObjectType({
-  name: "Event",
+const eventType = new GraphQLObjectType({
+  name: 'Event',
   fields: {
-    type: {type: GraphQLString},
-    public: {type: GraphQLBoolean},
-    created_at: {type: GraphQLString},
-    id: {type: GraphQLString},
-  }
+    type: { type: GraphQLString },
+    public: { type: GraphQLBoolean },
+    created_at: { type: GraphQLString },
+    id: { type: GraphQLString },
+  },
 });

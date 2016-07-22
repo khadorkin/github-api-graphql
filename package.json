@@ -4,9 +4,12 @@
   "description": "GraphQL overlay for GitHub",
   "main": "index.js",
   "scripts": {
+    "build": "babel src -d lib",
+    "lint": "eslint src",
     "start": "babel-node src/cloud/main.js",
     "update-schema": "babel-node ./scripts/updateSchema.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run lint && npm run check && npm run testonly && npm run test-blackbox",
+    "testonly": "mocha $npm_package_options_mocha"
   },
   "babel": {
     "optional": [
@@ -19,6 +22,7 @@
   "homepage": "https://github.com/rportugal/graphql-github-js",
   "dependencies": {
     "body-parser": "^1.15.0",
+    "dataloader": "^1.2.0",
     "ejs": "^2.4.1",
     "express": "^4.13.3",
     "express-graphql": "^0.4.9",
@@ -33,6 +37,15 @@
   },
   "devDependencies": {
     "babel": "^5.8.3",
-    "babel-runtime": "^5.8.34"
+    "babel-runtime": "^5.8.34",
+    "eslint": "^3.1.1",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.11.1",
+    "eslint-plugin-jsx-a11y": "^2.0.1",
+    "eslint-plugin-react": "^5.2.2",
+    "mocha": "^2.2.5"
+  },
+  "engines": {
+    "node": "6.x"
   }
 }
