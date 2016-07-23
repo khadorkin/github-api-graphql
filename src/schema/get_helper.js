@@ -7,6 +7,8 @@ export function getFromURL(url) {
         console.log(`Error: ${result.message}`);
         reject(result);
       } else {
+        // console.log("getFromURL");
+        // console.log(result);
         resolve(result);
       }
     });

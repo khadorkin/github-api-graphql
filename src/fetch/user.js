@@ -12,3 +12,14 @@ export class User {
     return rawData;
   }
 }
+
+export class UserFollowers {
+  static async gen(loaders, userNames: Array<string>): Promise<?UserFollowers> {
+    const rawData = await loaders.users.loadMany(userNames);
+    if (rawData === null) return null;
+    console.log("User Followers");
+    console.log(rawData);
+
+    return rawData;
+  }
+}
