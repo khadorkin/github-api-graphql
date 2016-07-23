@@ -6,9 +6,6 @@ import {
   GraphQLList,
 } from 'graphql';
 
-import restler from 'restler';
-import { GITHUB_BASE_URL } from './conf';
-
 import {
   GHRepositoryType,
   getAuthenticatedUserRepos,
@@ -73,22 +70,6 @@ export const GHUserType = new GraphQLObjectType({
     // /issues
   }),
 });
-
-export function getUser(userName) {
-  return new Promise((resolve, reject) => {
-    const url = `${GITHUB_BASE_URL}/users/${userName}`;
-
-    restler.get(url).on('complete', (result) => {
-      if (result instanceof Error) {
-        console.log(`Error: ${result.message}`);
-        // this.retry(5000);
-        reject(result);
-      } else {
-        resolve(result);
-      }
-    });
-  });
-}
 
 /*
 export function getAuthenticatedUser(accessToken) {

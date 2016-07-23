@@ -12,37 +12,32 @@ import {
   GHRepositoryType,
 } from './repository_type';
 
+import { User } from '../fetch/user';
+import { Repo } from '../fetch/repo';
+
 const queryType = new GraphQLObjectType({
   name: 'Root',
   fields: {
     me: {
       type: GHUserType,
-      resolve: (parentValue, _, { rootValue: { user, accessToken } }) => {
-        console.log(user);
-        // return getAuthenticatedUser(user.accessToken);
-        console.log(accessToken);
-        // return user.profile._json;
-      },
+      resolve: (parentValue, _, { rootValue: { loaders, user, accessToken } }) =>
+        AuthenticatedUser.gen(),
     },
     user: {
       type: GHUserType,
       args: {
         userName: { type: GraphQLString },
       },
-      resolve: (parentValue, { userName }) => {
-        console.log(userName);
-        // return getUser(userName);
-      },
+      resolve: (parentValue, { userName }, { rootValue: { loaders } }) =>
+        User.gen(loaders, userName)
     },
     repo: {
       type: GHRepositoryType,
       args: {
         fullName: { type: GraphQLString },
       },
-      resolve: (parentValue, { fullName }) => {
-        console.log(fullName);
-        // return getRepo(fullName);
-      },
+      resolve: (parentValue, { fullName }, { rootValue: { loaders } }) =>
+        Repo.gen(loaders, fullName),
     },
   },
 });

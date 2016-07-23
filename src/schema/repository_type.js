@@ -6,10 +6,6 @@ import {
   GraphQLList,
 } from 'graphql';
 
-import restler from 'restler';
-import https from 'https';
-
-import { GITHUB_BASE_URL } from './conf';
 import {
   GHCommentType,
 } from './comment_type';
@@ -100,47 +96,3 @@ export const GHRepositoryType = new GraphQLObjectType({
   },
 });
 
-export function getAuthenticatedUserRepos(accessToken) {
-  return new Promise((resolve, reject) => {
-    const url = `${GITHUB_BASE_URL}/user/repos`;
-
-    restler.get(url, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    }).on('complete', (result) => {
-      if (result instanceof Error) {
-        console.log(`Error: ${result.error}`);
-        reject(result);
-      } else {
-        resolve(result);
-      }
-    });
-  });
-}
-
-export function getRepo(fullName) {
-  return new Promise((resolve, reject) => {
-    let outputData;
-    const options = {
-      host: GITHUB_BASE_URL,
-      port: 443,
-      path: `/repos/${fullName}`,
-      headers: { 'User-Agent': 'GraphQL overlay' },
-    };
-
-    let data = '';
-    const req = https.request(options, (res) => {
-      res.setEncoding('utf8');
-      res.on('data', (chunk) => {
-        data += chunk;
-      });
-      res.on('end', () => {
-        outputData = JSON.parse(data);
-        resolve(outputData);
-      });
-    }).on('error', (e) => {
-      console.log(`error on getRepo(): ${e}`);
-      reject(outputData);
-    });
-    req.end();
-  });
-}
