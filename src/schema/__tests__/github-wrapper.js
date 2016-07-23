@@ -1,8 +1,8 @@
-import githubSchema from "../";
-import { graphql } from "graphql";
+import githubSchema from '../';
+import { graphql } from 'graphql';
 
 export async function github(query) {
-  var result = await graphql(githubSchema, query);
+  const result = await graphql(githubSchema, query);
   if (result.errors !== undefined) {
     throw new Error(JSON.stringify(result.errors, null, 2));
   }

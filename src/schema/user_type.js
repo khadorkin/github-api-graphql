@@ -36,9 +36,8 @@ export const GHUserType = new GraphQLObjectType({
     repos_url: { type: GraphQLString },
     repos: {
       type: new GraphQLList(GHRepositoryType),
-      resolve: (parentValue, _, { rootValue: { user } }) => {
-        return getAuthenticatedUserRepos(user.accessToken);
-      },
+      resolve: (parentValue, _, { rootValue: { user } }) =>
+        getAuthenticatedUserRepos(user.accessToken),
     },
     events_url: { type: GraphQLString },
     received_events_url: { type: GraphQLString },
@@ -63,15 +62,11 @@ export const GHUserType = new GraphQLObjectType({
     },
     followers: {
       type: new GraphQLList(GHUserType),
-      resolve: parentValue => {
-        return getFromURL(parentValue.followers_url);
-      },
+      resolve: parentValue => getFromURL(parentValue.followers_url),
     },
     following: {
       type: new GraphQLList(GHUserType),
-      resolve: parentValue => {
-        return getFromURL(parentValue.following_url);
-      },
+      resolve: parentValue => getFromURL(parentValue.following_url),
     },
     created_at: { type: GraphQLString },
     updated_at: { type: GraphQLString },

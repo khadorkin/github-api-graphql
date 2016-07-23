@@ -17,7 +17,8 @@ const queryType = new GraphQLObjectType({
   fields: {
     me: {
       type: GHUserType,
-      resolve: (parentValue, _, { rootValue: { user, accessToken } } ) => {
+      resolve: (parentValue, _, { rootValue: { user, accessToken } }) => {
+        console.log(user);
         // return getAuthenticatedUser(user.accessToken);
         console.log(accessToken);
         // return user.profile._json;
@@ -39,6 +40,7 @@ const queryType = new GraphQLObjectType({
         fullName: { type: GraphQLString },
       },
       resolve: (parentValue, { fullName }) => {
+        console.log(fullName);
         // return getRepo(fullName);
       },
     },
@@ -46,5 +48,5 @@ const queryType = new GraphQLObjectType({
 });
 
 export default new GraphQLSchema({
-  query: queryType
+  query: queryType,
 });
