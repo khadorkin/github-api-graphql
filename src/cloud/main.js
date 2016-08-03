@@ -76,7 +76,7 @@ app.use('/', /* ensureAuthenticated, */ graphqlHTTP(req => ({
   schema: githubSchema,
   graphiql: true,
   pretty: true,
-  rootValue: {
+  context: {
     user: req.user,
     loaders: createLoaders(),
   },
