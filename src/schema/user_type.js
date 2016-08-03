@@ -16,7 +16,7 @@ import {
 } from './get_helper';
 
 import {
-  UserFollowers
+  UserFollowers,
 } from '../fetch/user';
 
 export const GHUserType = new GraphQLObjectType({
@@ -66,10 +66,10 @@ export const GHUserType = new GraphQLObjectType({
       resolve: (parentValue, _, { rootValue: { loaders } }) => {
         const result = getFromURL(parentValue.followers_url);
         result.then(data => {
-          let logins = data.map((item) => item.login);
+          const logins = data.map((item) => item.login);
           return UserFollowers.gen(loaders, logins);
         });
-      }
+      },
     },
     following: {
       type: new GraphQLList(GHUserType),

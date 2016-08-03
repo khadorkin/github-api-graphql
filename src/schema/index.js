@@ -20,8 +20,8 @@ const queryType = new GraphQLObjectType({
   fields: {
     me: {
       type: GHUserType,
-      resolve: (parentValue, _, { rootValue: { loaders, user, accessToken } }) =>
-        AuthenticatedUser.gen(),
+      resolve: (/* parentValue,  _, { rootValue: { loaders, user, accessToken } } */) =>
+        '', // AuthenticatedUser.gen(),
     },
     user: {
       type: GHUserType,
@@ -29,7 +29,7 @@ const queryType = new GraphQLObjectType({
         userName: { type: GraphQLString },
       },
       resolve: (parentValue, { userName }, { rootValue: { loaders } }) =>
-        User.gen(loaders, userName)
+        User.gen(loaders, userName),
     },
     repo: {
       type: GHRepositoryType,

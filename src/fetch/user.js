@@ -1,5 +1,5 @@
 export class AuthenticatedUser {
-  static async gen(loaders): Promise<?AuthenticatedUser> {
+  static async gen(/* loaders */): Promise<?AuthenticatedUser> {
     // const rawData = await loaders.getUser()
   }
 }
@@ -17,7 +17,7 @@ export class UserFollowers {
   static async gen(loaders, userNames: Array<string>): Promise<?UserFollowers> {
     const rawData = await loaders.users.loadMany(userNames);
     if (rawData === null) return null;
-    console.log("User Followers");
+    console.log('User Followers');
     console.log(rawData);
 
     return rawData;

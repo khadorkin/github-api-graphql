@@ -1,6 +1,5 @@
 import DataLoader from 'dataloader';
 import restler from 'restler';
-import https from 'https';
 import { GITHUB_BASE_URL } from '../conf';
 
 function getUser(userName: string): Object {
@@ -62,12 +61,12 @@ export function getRepo(fullName) {
   });
 }
 
-export function createLoaders(authToken: string): Object {
+export function createLoaders(/* authToken: string */): Object {
   return {
     users: new DataLoader(ids => Promise.all(ids.map(getUser))),
     repos: new DataLoader(ids => Promise.all(ids.map(getRepo))),
     // issues: new DataLoader(ids => Promise.all(ids.map(getIssue))),
     // pullRequests: new DataLoader(ids => Promise.all(ids.map(getPullRequest))),
     comments: new DataLoader(ids => Promise.all(ids.map(getComments))),
-  }
+  };
 }

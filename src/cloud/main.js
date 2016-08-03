@@ -1,13 +1,13 @@
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
-const passport = require('passport');
+// const passport = require('passport');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
-import { Strategy as GitHubStrategy } from 'passport-github2';
+// import { Strategy as GitHubStrategy } from 'passport-github2';
 
 import githubSchema from '../schema';
-import { createLoaders } from "../fetch/loaders";
+import { createLoaders } from '../fetch/loaders';
 
 const partials = require('express-partials');
 
@@ -72,7 +72,7 @@ app.get('/logout', (req, res) => {
 
 app.all('/graphql', (req, res) => res.redirect('/'));
 
-app.use('/', /*ensureAuthenticated,*/ graphqlHTTP(req => ({
+app.use('/', /* ensureAuthenticated, */ graphqlHTTP(req => ({
   schema: githubSchema,
   graphiql: true,
   pretty: true,
