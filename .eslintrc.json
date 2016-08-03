@@ -4,5 +4,8 @@
     "env": {
       "mocha": true,
       "node": true
+    },
+    "rules":{
+      "no-console":0
     }
 }
