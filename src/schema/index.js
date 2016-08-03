@@ -12,7 +12,7 @@ import {
   GHRepositoryType,
 } from './repository_type';
 
-import { User } from '../fetch/user';
+import { User, AuthenticatedUser } from '../fetch/user';
 import { Repo } from '../fetch/repo';
 
 const queryType = new GraphQLObjectType({
@@ -20,8 +20,8 @@ const queryType = new GraphQLObjectType({
   fields: {
     me: {
       type: GHUserType,
-      resolve: (/* parentValue,  _, { rootValue: { loaders, user, accessToken } } */) =>
-        '', // AuthenticatedUser.gen(),
+      resolve: (parentValue, _, { loaders/* , user, accessToken */ }) =>
+        AuthenticatedUser.gen(loaders, 'rportugal'),
     },
     user: {
       type: GHUserType,
