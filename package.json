@@ -6,7 +6,7 @@
     "mocha": "--compilers js:babel-register --require babel-polyfill src/**/test/**/*.js"
   },
   "scripts": {
-    "build": "babel src -d lib",
+    "build": "babel src -d build",
     "check": "flow check",
     "lint": "eslint src",
     "start": "babel-node src/cloud/main.js",
