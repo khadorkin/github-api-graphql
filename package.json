@@ -9,7 +9,7 @@
     "build": "babel src -d build",
     "check": "flow check",
     "lint": "eslint src",
-    "start": "babel-node src/cloud/main.js",
+    "start": "babel-node src/server/main.js",
     "update-schema": "babel-node ./scripts/updateSchema.js",
     "test": "npm run lint && npm run check && npm run testonly",
     "testonly": "mocha $npm_package_options_mocha"
@@ -48,7 +48,7 @@
     "eslint-plugin-react": "^5.2.2",
     "flow-bin": "^0.18.1",
     "mocha": "^2.2.5",
-    "nock": "^8.0.0"
+    "nock": "^7.7.2"
   },
   "engines": {
     "node": "6.x"
