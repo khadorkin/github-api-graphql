@@ -3,16 +3,12 @@ import {
   GraphQLInt,
   GraphQLString,
   GraphQLBoolean,
-  GraphQLList,
+  // GraphQLList,
 } from 'graphql';
 
-import {
-  GHCommentType,
-} from './comment_type';
-
-import {
-  getFromURLWithAuth,
-} from './get_helper';
+// import {
+//   GHCommentType,
+// } from './comment_type';
 
 export const GHRepositoryType = new GraphQLObjectType({
   name: 'Repository',
@@ -35,15 +31,15 @@ export const GHRepositoryType = new GraphQLObjectType({
     //   type: new GraphQLList(GHUserType)
     // },
     collaborators_url: { type: GraphQLString },
-    comments: {
-      type: new GraphQLList(GHCommentType),
-      resolve: (parentValue, _, { rootValue: { user } }) => {
-        console.log('Going to call with');
-        console.log(parentValue.comments_url);
-        console.log(user);
-        return getFromURLWithAuth(parentValue.comments_url, user.accessToken);
-      },
-    },
+    // comments: {
+    //   type: new GraphQLList(GHCommentType),
+    //   resolve: (parentValue, _, { rootValue: { user } }) => {
+    //     console.log('Going to call with');
+    //     console.log(parentValue.comments_url);
+    //     console.log(user);
+    //     return getFromURLWithAuth(parentValue.comments_url, user.accessToken);
+    //   },
+    // },
     comments_url: { type: GraphQLString },
     commits_url: { type: GraphQLString },
     compare_url: { type: GraphQLString },

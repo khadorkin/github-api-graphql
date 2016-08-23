@@ -21,7 +21,7 @@ import {
 
 export const GHUserType = new GraphQLObjectType({
   name: 'User',
-  fields: {
+  fields: () => ({
     login: { type: GraphQLString },
     id: { type: GraphQLInt },
     avatar_url: { type: GraphQLString },
@@ -61,16 +61,16 @@ export const GHUserType = new GraphQLObjectType({
       type: GraphQLInt,
       resolve: parentValue => parentValue.following,
     },
-    // // followers: {
-    // //   type: new GraphQLList(GHUserType),
-    // //   resolve: (parentValue, _, { rootValue: { loaders } }) => {
-    // //     const result = getFromURL(parentValue.followers_url);
-    // //     result.then(data => {
-    // //       const logins = data.map((item) => item.login);
-    // //       return UserFollowers.gen(loaders, logins);
-    // //     });
-    // //   },
-    // // },
+    // followers: {
+    //   type: new GraphQLList(GHUserType),
+    //   resolve: (parentValue, _, { loaders }) => {
+    //     const result = getFromURL(parentValue.followers_url);
+    //     result.then(data => {
+    //       const logins = data.map((item) => item.login);
+    //       return UserFollowers.gen(loaders, logins);
+    //     });
+    //   },
+    // },
     // // following: {
     // //   type: new GraphQLList(GHUserType),
     // //   resolve: parentValue => getFromURL(parentValue.following_url),
@@ -78,7 +78,7 @@ export const GHUserType = new GraphQLObjectType({
     created_at: { type: GraphQLString },
     updated_at: { type: GraphQLString },
     // /issues
-  },
+  }),
 });
 
 /*

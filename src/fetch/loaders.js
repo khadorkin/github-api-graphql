@@ -2,10 +2,8 @@ import DataLoader from 'dataloader';
 import fetch from 'isomorphic-fetch';
 import { GITHUB_BASE_URL } from '../conf';
 
-export function getPath(path) {
+function getUrl(url) {
   return new Promise((resolve, reject) => {
-    const url = `${GITHUB_BASE_URL}/${path}`;
-
     fetch(url, {
       method: 'get',
     })
@@ -20,8 +18,11 @@ export function getPath(path) {
       });
   });
 }
+function getPath(path) {
+  return getUrl(`${GITHUB_BASE_URL}/${path}`);
+}
 
-export function getRepo(fullName) {
+function getRepo(fullName) {
   return getPath(`/repos/${fullName}`);
 }
 
