@@ -7,15 +7,15 @@ export function getPath(path) {
     const url = `${GITHUB_BASE_URL}/${path}`;
 
     fetch(url, {
-      method: 'get'
+      method: 'get',
     })
-      .then(function(response) {
+      .then(response => {
         if (response.status >= 400) {
-          reject("Bad response from server");
+          reject('Bad response from server');
         }
         return response.json();
       })
-      .then(function(data) {
+      .then(data => {
         resolve(data);
       });
   });
@@ -48,6 +48,6 @@ export function createLoaders(/* authToken: string */): Object {
     repos: new DataLoader(ids => Promise.all(ids.map(getRepo))),
     // issues: new DataLoader(ids => Promise.all(ids.map(getIssue))),
     // pullRequests: new DataLoader(ids => Promise.all(ids.map(getPullRequest))),
-    comments: new DataLoader(ids => Promise.all(ids.map(getComments))),
+    // comments: new DataLoader(ids => Promise.all(ids.map(getComments))),
   };
 }

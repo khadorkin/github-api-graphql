@@ -40,9 +40,9 @@ describe('Repository query', () => {
 
     const repo = result.data.repo;
     expect(repo.id).to.equal(7981476);
-    expect(repo.name).to.equal("opencv-zbar");
-    expect(repo.full_name).to.equal("rportugal/opencv-zbar");
-    expect(repo.description).to.equal("Barcode and QR Code reader using OpenCV and ZBar");
+    expect(repo.name).to.equal('opencv-zbar');
+    expect(repo.full_name).to.equal('rportugal/opencv-zbar');
+    expect(repo.description).to.equal('Barcode and QR Code reader using OpenCV and ZBar');
     expect(repo.private).to.equal(false);
   });
 });
