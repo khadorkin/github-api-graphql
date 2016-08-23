@@ -93,7 +93,6 @@ describe('User query', () => {
 
     it('returns the base fields', async() => {
       const result = await runQuery(query);
-      console.log(result);
 
       expect(nock.isDone()).to.equal(true, "Didn't hit all mock endpoints!");
       expect(result.errors).to.be.undefined();

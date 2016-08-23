@@ -23,11 +23,11 @@ function getPath(path) {
 }
 
 function getRepo(fullName) {
-  return getPath(`/repos/${fullName}`);
+  return getPath(`repos/${fullName}`);
 }
 
 function getUser(userName: string): Object {
-  return getPath(`/users/${userName}`);
+  return getPath(`users/${userName}`);
 }
 
 // function getComments(repoUrl: string, accessToken: string): Object {

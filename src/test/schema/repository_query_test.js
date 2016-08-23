@@ -17,7 +17,6 @@ const query = `
 
 describe('Repository query', () => {
   beforeEach(() => {
-    // nock.disableNetConnect();
     nock(`${GITHUB_BASE_URL}`)
       .persist()
       .intercept(/repos\/rportugal\/opencv-zbar/, 'GET')
