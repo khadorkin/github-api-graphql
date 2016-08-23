@@ -8,12 +8,12 @@ import {
   GHUserType,
 } from './user';
 
-// import {
-//   GHRepositoryType,
-// } from './repository_type';
+import {
+  GHRepositoryType,
+} from './repository';
 
 import { User } from '../fetch/user';
-// import { Repo } from '../fetch/repo';
+import { Repo } from '../fetch/repo';
 
 const queryType = new GraphQLObjectType({
   name: 'Root',
@@ -31,14 +31,14 @@ const queryType = new GraphQLObjectType({
       resolve: (parentValue, { userName }, { loaders }) =>
         User.gen(loaders, userName),
     },
-    // repo: {
-    //   type: GHRepositoryType,
-    //   args: {
-    //     fullName: { type: GraphQLString },
-    //   },
-    //   resolve: (parentValue, { fullName }, { loaders }) =>
-    //     Repo.gen(loaders, fullName),
-    // },
+    repo: {
+      type: GHRepositoryType,
+      args: {
+        fullName: { type: GraphQLString },
+      },
+      resolve: (parentValue, { fullName }, { loaders }) =>
+        Repo.gen(loaders, fullName),
+    },
   },
 });
 

@@ -8,5 +8,6 @@ const context = {
 };
 
 export function runQuery(query) {
-  return graphql(Schema, query, null, context);
+  const result = graphql(Schema, query, null, context);
+  return result;
 }

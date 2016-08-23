@@ -23,14 +23,7 @@ export const GHUserType = new GraphQLObjectType({
   name: 'User',
   fields: {
     login: { type: GraphQLString },
-    id: {
-      type: GraphQLInt,
-      resolve: parentValue => {
-        console.log('parentValue');
-        console.log(parentValue);
-        return parentValue.id;
-      },
-    },
+    id: { type: GraphQLInt },
     avatar_url: { type: GraphQLString },
     gravatar_id: { type: GraphQLString },
     url: { type: GraphQLString },

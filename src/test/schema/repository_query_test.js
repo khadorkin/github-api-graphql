@@ -5,24 +5,24 @@ import { GITHUB_BASE_URL } from '../../conf';
 
 const query = `
 {
-  user(userName: "rportugal") {
-    login
+  repo(fullName: "rportugal/opencv-zbar") {
     id
-    avatar_url
-    gravatar_id
-    url  
+    name
+    full_name
+    description
+    private
   }
 }
 `;
 
-describe('User query', () => {
+describe('Repository query', () => {
   beforeEach(() => {
     // nock.disableNetConnect();
     nock(`${GITHUB_BASE_URL}`)
       .persist()
-      .intercept(/users\/rportugal/, 'GET')
+      .intercept(/repos\/rportugal\/opencv-zbar/, 'GET')
       .times(1)
-      .replyWithFile(200, 'src/test/fixtures/user_valid.json');
+      .replyWithFile(200, 'src/test/fixtures/repo_valid.json');
   });
 
   afterEach(() => {
@@ -38,11 +38,11 @@ describe('User query', () => {
     const result = await runQuery(query);
     expect(nock.isDone()).to.equal(true, "Didn't hit all mock endpoints!");
 
-    const user = result.data.user;
-    expect(user.login).to.equal('rportugal');
-    expect(user.id).to.equal(784082);
-    expect(user.avatar_url).to.equal('https://avatars.githubusercontent.com/u/784082?v=3');
-    expect(user.gravatar_id).to.equal('');
-    expect(user.url).to.equal('https://api.github.com/users/rportugal');
+    const repo = result.data.repo;
+    expect(repo.id).to.equal(7981476);
+    expect(repo.name).to.equal("opencv-zbar");
+    expect(repo.full_name).to.equal("rportugal/opencv-zbar");
+    expect(repo.description).to.equal("Barcode and QR Code reader using OpenCV and ZBar");
+    expect(repo.private).to.equal(false);
   });
 });
