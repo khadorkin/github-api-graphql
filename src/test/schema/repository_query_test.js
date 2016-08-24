@@ -1,7 +1,7 @@
 import { runQuery } from '../helpers/graphql_runner';
 import { expect } from 'chai';
 import nock from 'nock';
-import { GITHUB_BASE_URL } from '../../conf';
+import { mockRepo } from '../helpers/mock';
 
 const query = `
 {
@@ -17,11 +17,7 @@ const query = `
 
 describe('Repository query', () => {
   beforeEach(() => {
-    nock(`${GITHUB_BASE_URL}`)
-      .persist()
-      .intercept(/repos\/rportugal\/opencv-zbar/, 'GET')
-      .times(1)
-      .replyWithFile(200, 'src/test/fixtures/repo_valid.json');
+    mockRepo('rportugal/opencv-zbar');
   });
 
   afterEach(() => {

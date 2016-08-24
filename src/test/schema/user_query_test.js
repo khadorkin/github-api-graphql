@@ -1,9 +1,9 @@
 import { runQuery } from '../helpers/graphql_runner';
+import { mockUser, mockUserNotFound } from '../helpers/mock';
 import chai, { expect } from 'chai';
 import dirtyChai from 'dirty-chai';
 chai.use(dirtyChai);
 import nock from 'nock';
-import { GITHUB_BASE_URL } from '../../conf';
 
 const query = `
 {
@@ -67,11 +67,7 @@ describe('User query', () => {
 
   describe('when the user does not exist', () => {
     beforeEach(() => {
-      nock(`${GITHUB_BASE_URL}`)
-        .persist()
-        .intercept(/users\/rportugal/, 'GET')
-        .times(1)
-        .replyWithFile(401, 'src/test/fixtures/user_not_found.json');
+      mockUserNotFound('rportugal');
     });
 
     it('returns null', async() => {
@@ -84,11 +80,7 @@ describe('User query', () => {
 
   describe('when the user exists', () => {
     beforeEach(() => {
-      nock(`${GITHUB_BASE_URL}`)
-        .persist()
-        .intercept(/users\/rportugal/, 'GET')
-        .times(1)
-        .replyWithFile(200, 'src/test/fixtures/user_valid.json');
+      mockUser('rportugal');
     });
 
     it('returns the base fields', async() => {
