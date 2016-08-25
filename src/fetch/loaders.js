@@ -30,6 +30,10 @@ function getUser(userName: string): Object {
   return getPath(`users/${userName}`);
 }
 
+function getRepoEvents(fullName) {
+  return getPath(`repos/${fullName}/issues/events`);
+}
+
 // function getComments(repoUrl: string, accessToken: string): Object {
 //   return new Promise((resolve, reject) => {
 //     restler.get(repoUrl, {
@@ -47,6 +51,7 @@ export function createLoaders(/* authToken: string */): Object {
   return {
     users: new DataLoader(ids => Promise.all(ids.map(getUser))),
     repos: new DataLoader(ids => Promise.all(ids.map(getRepo))),
+    repoEvents: new DataLoader(ids => Promise.all(ids.map(getRepoEvents))),
     // issues: new DataLoader(ids => Promise.all(ids.map(getIssue))),
     // pullRequests: new DataLoader(ids => Promise.all(ids.map(getPullRequest))),
     // comments: new DataLoader(ids => Promise.all(ids.map(getComments))),

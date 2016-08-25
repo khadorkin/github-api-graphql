@@ -1,17 +1,14 @@
 import { expect } from 'chai';
 import nock from 'nock';
-import { mockUser, mockRepo } from '../helpers/mock';
+import { mockUser, mockRepo, mockRepoEvents } from '../helpers/mock';
 import { createLoaders } from '../../fetch/loaders';
 import fs from 'fs';
-
-// import dotenv from 'dotenv';
-// dotenv.config({ path: '.env.test', silent: true });
-// dotenv.load();
 
 describe('Loaders', () => {
   let loaders;
 
   beforeEach(() => {
+    nock.disableNetConnect();
     loaders = createLoaders();
   });
 
@@ -31,16 +28,22 @@ describe('Loaders', () => {
 
   describe('Repo loader', () => {
     it('is able to fetch a repo through the loader', async() => {
-      const repo = 'rportugal/opencv-zbar';
-      const filename = mockRepo(repo);
-      const result = await loaders.repos.load(repo);
+      const fullName = 'rportugal/opencv-zbar';
+      const filename = mockRepo(fullName);
+      const result = await loaders.repos.load(fullName);
       const expectedResult = JSON.parse(fs.readFileSync(filename, 'utf8'));
       expect(result).to.deep.eq(expectedResult);
     });
   });
 
-  describe('Events loader', () => {
-
+  describe('Repository Events loader', () => {
+    it('is able to fetch a repository event through the loader', async() => {
+      const fullName = 'graphql/express-graphql';
+      const filename = mockRepoEvents(fullName);
+      const result = await loaders.repoEvents.load(fullName);
+      const expectedResult = JSON.parse(fs.readFileSync(filename, 'utf8'));
+      expect(result).to.deep.eq(expectedResult);
+    });
   });
 
   describe('Issues loader', () => {
