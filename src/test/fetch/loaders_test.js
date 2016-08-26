@@ -4,6 +4,10 @@ import { mockUser, mockRepo, mockRepoEvents } from '../helpers/mock';
 import { createLoaders } from '../../fetch/loaders';
 import fs from 'fs';
 
+function loadExpectedResult(filename) {
+  return JSON.parse(fs.readFileSync(filename, 'utf8'));
+}
+
 describe('Loaders', () => {
   let loaders;
 
@@ -21,7 +25,7 @@ describe('Loaders', () => {
       const userName = 'rportugal';
       const filename = mockUser(userName);
       const result = await loaders.users.load(userName);
-      const expectedResult = JSON.parse(fs.readFileSync(filename, 'utf8'));
+      const expectedResult = loadExpectedResult(filename);
       expect(result).to.deep.eq(expectedResult);
     });
   });
@@ -31,7 +35,7 @@ describe('Loaders', () => {
       const fullName = 'rportugal/opencv-zbar';
       const filename = mockRepo(fullName);
       const result = await loaders.repos.load(fullName);
-      const expectedResult = JSON.parse(fs.readFileSync(filename, 'utf8'));
+      const expectedResult = loadExpectedResult(filename);
       expect(result).to.deep.eq(expectedResult);
     });
   });
@@ -41,7 +45,7 @@ describe('Loaders', () => {
       const fullName = 'graphql/express-graphql';
       const filename = mockRepoEvents(fullName);
       const result = await loaders.repoEvents.load(fullName);
-      const expectedResult = JSON.parse(fs.readFileSync(filename, 'utf8'));
+      const expectedResult = loadExpectedResult(filename);
       expect(result).to.deep.eq(expectedResult);
     });
   });
