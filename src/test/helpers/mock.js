@@ -5,6 +5,14 @@ function fixRepoFullName(fullName) {
   return fullName.replace(/\//g, '--');
 }
 
+function mockReplyWithFilename(regex, filename) {
+  nock(`${GITHUB_BASE_URL}`)
+    .persist()
+    .intercept(new RegExp(regex), 'GET')
+    .times(1)
+    .replyWithFile(200, filename);
+}
+
 export function mockUserNotFound(userName) {
   const regexStr = `users\/${userName}`;
   nock(`${GITHUB_BASE_URL}`)
@@ -17,13 +25,7 @@ export function mockUserNotFound(userName) {
 export function mockUser(userName) {
   const regexStr = `users\/${userName}`;
   const responseFilename = `src/test/fixtures/user_${userName}.json`;
-
-  nock(`${GITHUB_BASE_URL}`)
-    .persist()
-    .intercept(new RegExp(regexStr), 'GET')
-    .times(1)
-    .replyWithFile(200, responseFilename);
-
+  mockReplyWithFilename(regexStr, responseFilename);
   return responseFilename;
 }
 
@@ -31,11 +33,7 @@ export function mockRepo(fullName) {
   const fullNameFixed = fixRepoFullName(fullName);
   const regexStr = `/repos/${fullName}`;
   const responseFilename = `src/test/fixtures/repo_${fullNameFixed}.json`;
-  nock(`${GITHUB_BASE_URL}`)
-    .persist()
-    .intercept(new RegExp(regexStr), 'GET')
-    .times(1)
-    .replyWithFile(200, responseFilename);
+  mockReplyWithFilename(regexStr, responseFilename);
 
   return responseFilename;
 }
@@ -44,11 +42,7 @@ export function mockRepoEvents(fullName) {
   const fullNameFixed = fixRepoFullName(fullName);
   const regexStr = `/repos/${fullName}`;
   const responseFilename = `src/test/fixtures/issues_repo_events_${fullNameFixed}.json`;
-  nock(`${GITHUB_BASE_URL}`)
-    .persist()
-    .intercept(new RegExp(regexStr), 'GET')
-    .times(1)
-    .replyWithFile(200, responseFilename);
+  mockReplyWithFilename(regexStr, responseFilename);
 
   return responseFilename;
 }
