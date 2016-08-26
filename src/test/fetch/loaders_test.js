@@ -1,6 +1,11 @@
 import { expect } from 'chai';
 import nock from 'nock';
-import { mockUser, mockRepo, mockRepoEvents } from '../helpers/mock';
+import {
+  mockUser,
+  mockRepo,
+  mockRepoEvents,
+  mockPullRequestsRepo,
+} from '../helpers/mock';
 import { createLoaders } from '../../fetch/loaders';
 import fs from 'fs';
 
@@ -45,6 +50,16 @@ describe('Loaders', () => {
       const fullName = 'graphql/express-graphql';
       const filename = mockRepoEvents(fullName);
       const result = await loaders.repoEvents.load(fullName);
+      const expectedResult = loadExpectedResult(filename);
+      expect(result).to.deep.eq(expectedResult);
+    });
+  });
+
+  describe('Pull Requests for Repository loader', () => {
+    it('is able to fetch the pull requests for a repository through the loader', async() => {
+      const fullName = 'graphql/express-graphql';
+      const filename = mockPullRequestsRepo(fullName);
+      const result = await loaders.pullRequestsRepo.load(fullName);
       const expectedResult = loadExpectedResult(filename);
       expect(result).to.deep.eq(expectedResult);
     });

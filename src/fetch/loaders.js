@@ -34,6 +34,9 @@ function getRepoEvents(fullName) {
   return getPath(`repos/${fullName}/issues/events`);
 }
 
+function getPullRequestsRepo(fullName) {
+  return getPath(`repos/${fullName}/pulls`);
+}
 // function getComments(repoUrl: string, accessToken: string): Object {
 //   return new Promise((resolve, reject) => {
 //     restler.get(repoUrl, {
@@ -53,7 +56,7 @@ export function createLoaders(/* authToken: string */): Object {
     repos: new DataLoader(ids => Promise.all(ids.map(getRepo))),
     repoEvents: new DataLoader(ids => Promise.all(ids.map(getRepoEvents))),
     // issues: new DataLoader(ids => Promise.all(ids.map(getIssue))),
-    // pullRequests: new DataLoader(ids => Promise.all(ids.map(getPullRequest))),
+    pullRequestsRepo: new DataLoader(ids => Promise.all(ids.map(getPullRequestsRepo))),
     // comments: new DataLoader(ids => Promise.all(ids.map(getComments))),
   };
 }
