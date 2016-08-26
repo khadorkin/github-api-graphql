@@ -40,7 +40,7 @@ export function mockRepo(fullName) {
 
 export function mockRepoEvents(fullName) {
   const fullNameFixed = fixRepoFullName(fullName);
-  const regexStr = `/repos/${fullName}`;
+  const regexStr = `/repos/${fullName}/issues/events`;
   const responseFilename = `src/test/fixtures/issues_repo_events_${fullNameFixed}.json`;
   mockReplyWithFilename(regexStr, responseFilename);
 
