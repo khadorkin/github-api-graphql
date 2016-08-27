@@ -25,7 +25,7 @@ describe('Loaders', () => {
     nock.cleanAll();
   });
 
-  describe('User loader', () => {
+  describe('User', () => {
     it('is able to fetch a user through the loader', async() => {
       const userName = 'rportugal';
       const filename = mockUser(userName);
@@ -35,7 +35,7 @@ describe('Loaders', () => {
     });
   });
 
-  describe('Repo loader', () => {
+  describe('Repository', () => {
     it('is able to fetch a repo through the loader', async() => {
       const fullName = 'rportugal/opencv-zbar';
       const filename = mockRepo(fullName);
@@ -45,7 +45,7 @@ describe('Loaders', () => {
     });
   });
 
-  describe('Repository Events loader', () => {
+  describe('Repository Events', () => {
     it('is able to fetch a repository event through the loader', async() => {
       const fullName = 'graphql/express-graphql';
       const filename = mockRepoEvents(fullName);
@@ -55,7 +55,7 @@ describe('Loaders', () => {
     });
   });
 
-  describe('Pull Requests for Repository loader', () => {
+  describe('Pull Requests for Repository', () => {
     it('is able to fetch the pull requests for a repository through the loader', async() => {
       const fullName = 'graphql/express-graphql';
       const filename = mockPullRequestsRepo(fullName);
@@ -65,7 +65,7 @@ describe('Loaders', () => {
     });
   });
 
-  describe('Issues loader', () => {
+  describe('Issues', () => {
 
   });
 });
