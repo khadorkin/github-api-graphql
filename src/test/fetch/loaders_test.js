@@ -26,7 +26,19 @@ describe('Loaders', () => {
   });
 
   describe('Activity APIs', () => {
+    describe('Events API', async() => {
+      it.skip('is able to list public events', async() => {
 
+      });
+
+      it.skip('is able to list issue events for a repository', async() => {
+
+      });
+
+      it.skip('is able to list public events for a network of repositories', async() => {
+        
+      });
+    });
   });
 
   describe('Users APIs', () => {
@@ -66,7 +78,7 @@ describe('Loaders', () => {
   });
 
   describe('Repository Events', () => {
-    it('is able to fetch a repository event through the loader', async() => {
+    it('is able to fetch repository events through the loader', async() => {
       const fullName = 'graphql/express-graphql';
       const filename = mockRepoEvents(fullName);
       const result = await loaders.repoEvents.load(fullName);
