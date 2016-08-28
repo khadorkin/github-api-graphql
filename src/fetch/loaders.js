@@ -34,6 +34,10 @@ function getRepoEvents(fullName) {
   return getPath(`repos/${fullName}/issues/events`);
 }
 
+function getRepoBranches(fullName) {
+  return getPath(`repos/${fullName}/branches`);
+}
+
 function getPullRequestsRepo(fullName) {
   return getPath(`repos/${fullName}/pulls`);
 }
@@ -55,6 +59,7 @@ export function createLoaders(/* authToken: string */): Object {
     users: new DataLoader(ids => Promise.all(ids.map(getUser))),
     repos: new DataLoader(ids => Promise.all(ids.map(getRepo))),
     repoEvents: new DataLoader(ids => Promise.all(ids.map(getRepoEvents))),
+    repoBranches: new DataLoader(ids => Promise.all(ids.map(getRepoBranches))),
     // issues: new DataLoader(ids => Promise.all(ids.map(getIssue))),
     pullRequestsRepo: new DataLoader(ids => Promise.all(ids.map(getPullRequestsRepo))),
     // comments: new DataLoader(ids => Promise.all(ids.map(getComments))),

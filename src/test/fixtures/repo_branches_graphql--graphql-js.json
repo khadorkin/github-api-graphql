@@ -1,0 +1,16 @@
+[
+  {
+    "name": "master",
+    "commit": {
+      "sha": "d85fa9f7c8e2fe4f05489ba40f333c326d22166e",
+      "url": "https://api.github.com/repos/graphql/graphql-js/commits/d85fa9f7c8e2fe4f05489ba40f333c326d22166e"
+    }
+  },
+  {
+    "name": "npm",
+    "commit": {
+      "sha": "68be10a5d1ce957fc77ceaaf7636dcae0286a25f",
+      "url": "https://api.github.com/repos/graphql/graphql-js/commits/68be10a5d1ce957fc77ceaaf7636dcae0286a25f"
+    }
+  }
+]

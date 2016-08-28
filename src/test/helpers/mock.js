@@ -47,6 +47,15 @@ export function mockRepoEvents(fullName) {
   return responseFilename;
 }
 
+export function mockRepoBranches(fullName) {
+  const fullNameFixed = fixRepoFullName(fullName);
+  const regexStr = `/repos/${fullName}/branches`;
+  const responseFilename = `src/test/fixtures/repo_branches_${fullNameFixed}.json`;
+  mockReplyWithFilename(regexStr, responseFilename);
+
+  return responseFilename;
+}
+
 export function mockPullRequestsRepo(fullName) {
   const fullNameFixed = fixRepoFullName(fullName);
   const regexStr = `/repos/${fullName}/pulls`;

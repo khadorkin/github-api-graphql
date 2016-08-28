@@ -5,6 +5,7 @@ import {
   mockRepo,
   mockRepoEvents,
   mockPullRequestsRepo,
+  mockRepoBranches,
 } from '../helpers/mock';
 import { createLoaders } from '../../fetch/loaders';
 import fs from 'fs';
@@ -36,7 +37,7 @@ describe('Loaders', () => {
       });
 
       it.skip('is able to list public events for a network of repositories', async() => {
-        
+
       });
     });
   });
@@ -66,6 +67,17 @@ describe('Loaders', () => {
   });
 
   describe('Repositories APIs', () => {
+    describe('Branches', () => {
+      describe('List branches', () => {
+        it.skip('is able to fetch the list of branches for a repo through the loader', async() => {
+          const fullName = 'graphql/graphql-js';
+          const filename = mockRepoBranches(fullName);
+          const result = await loaders.repoBranches.load(fullName);
+          const expectedResult = loadExpectedResult(filename);
+          expect(result).to.deep.eq(expectedResult);
+        });
+      });
+    });
     describe('Repository', () => {
       it('is able to fetch a repo through the loader', async() => {
         const fullName = 'rportugal/opencv-zbar';
@@ -101,5 +113,11 @@ describe('Loaders', () => {
 
   describe('Issues', () => {
 
+  });
+
+  describe('Organizations APIs', () => {
+    describe('User organizations', () => {
+
+    });
   });
 });
