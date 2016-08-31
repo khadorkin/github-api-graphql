@@ -1,13 +1,13 @@
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
-// const passport = require('passport');
+import githubSchema from '../schema';
+import { createLoaders } from '../fetch/loaders';
+
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
+// const passport = require('passport');
 // import { Strategy as GitHubStrategy } from 'passport-github2';
-
-import githubSchema from '../schema';
-import { createLoaders } from '../fetch/loaders';
 
 const partials = require('express-partials');
 

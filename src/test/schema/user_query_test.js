@@ -1,9 +1,11 @@
-import { runQuery } from '../helpers/graphql_runner';
-import { mockUser, mockUserNotFound } from '../helpers/mock';
+/* eslint-disable import/no-extraneous-dependencies */
 import chai, { expect } from 'chai';
 import dirtyChai from 'dirty-chai';
-chai.use(dirtyChai);
 import nock from 'nock';
+import runQuery from '../helpers/graphql_runner';
+import { mockUser, mockUserNotFound } from '../helpers/mock';
+
+chai.use(dirtyChai);
 
 const query = `
 {

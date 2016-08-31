@@ -4,7 +4,7 @@ import {
   GraphQLInt,
 } from 'graphql';
 
-export const GHCommentType = new GraphQLObjectType({
+const GHCommentType = new GraphQLObjectType({
   name: 'Comment',
   fields: {
     html_url: { type: GraphQLString },
@@ -18,3 +18,4 @@ export const GHCommentType = new GraphQLObjectType({
   },
 });
 
+export default GHCommentType;

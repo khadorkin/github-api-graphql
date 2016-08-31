@@ -1,5 +1,7 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import { expect } from 'chai';
 import nock from 'nock';
+import fs from 'fs';
 import {
   mockUser,
   mockRepo,
@@ -7,8 +9,7 @@ import {
   mockPullRequestsRepo,
   mockRepoBranches,
 } from '../helpers/mock';
-import { createLoaders } from '../../fetch/loaders';
-import fs from 'fs';
+import createLoaders from '../../fetch/loaders';
 
 function loadExpectedResult(filename) {
   return JSON.parse(fs.readFileSync(filename, 'utf8'));

@@ -1,5 +1,6 @@
-import { GITHUB_BASE_URL } from '../../conf';
+/* eslint-disable import/no-extraneous-dependencies */
 import nock from 'nock';
+import GITHUB_BASE_URL from '../../conf';
 
 function fixRepoFullName(fullName) {
   return fullName.replace(/\//g, '--');

@@ -1,4 +1,4 @@
-export class Repo {
+class Repo {
   static async gen(loaders, fullName: string): Promise<?Repo> {
     const rawData = await loaders.repos.load(fullName);
     if (rawData === null) return null;
@@ -6,3 +6,5 @@ export class Repo {
     return rawData;
   }
 }
+
+export default Repo;

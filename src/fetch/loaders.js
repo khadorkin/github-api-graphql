@@ -1,6 +1,6 @@
 import DataLoader from 'dataloader';
 import fetch from 'isomorphic-fetch';
-import { GITHUB_BASE_URL } from '../conf';
+import GITHUB_BASE_URL from '../conf';
 
 function getUrl(url) {
   return new Promise((resolve, reject) => {
@@ -54,7 +54,7 @@ function getPullRequestsRepo(fullName) {
 //   });
 // }
 
-export function createLoaders(/* authToken: string */): Object {
+export default function createLoaders(/* authToken: string */): Object {
   return {
     users: new DataLoader(ids => Promise.all(ids.map(getUser))),
     repos: new DataLoader(ids => Promise.all(ids.map(getRepo))),

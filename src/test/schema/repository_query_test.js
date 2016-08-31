@@ -1,6 +1,7 @@
-import { runQuery } from '../helpers/graphql_runner';
+/* eslint-disable import/no-extraneous-dependencies */
 import { expect } from 'chai';
 import nock from 'nock';
+import runQuery from '../helpers/graphql_runner';
 import { mockRepo } from '../helpers/mock';
 
 const query = `

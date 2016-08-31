@@ -19,7 +19,7 @@ import {
 //   UserFollowers,
 // } from '../fetch/user';
 
-export const GHUserType = new GraphQLObjectType({
+const GHUserType = new GraphQLObjectType({
   name: 'User',
   fields: () => ({
     login: { type: GraphQLString },
@@ -100,3 +100,5 @@ export function getAuthenticatedUser(accessToken) {
   });
 }
 */
+
+export default GHUserType;

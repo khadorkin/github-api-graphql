@@ -4,7 +4,7 @@ import {
   GraphQLObjectType,
 } from 'graphql';
 
-export const eventType = new GraphQLObjectType({
+const eventType = new GraphQLObjectType({
   name: 'Event',
   fields: {
     type: { type: GraphQLString },
@@ -13,3 +13,5 @@ export const eventType = new GraphQLObjectType({
     id: { type: GraphQLString },
   },
 });
+
+export default eventType;

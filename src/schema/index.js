@@ -4,16 +4,11 @@ import {
   GraphQLString,
 } from 'graphql';
 
-import {
-  GHUserType,
-} from './user';
-
-import {
-  GHRepositoryType,
-} from './repository';
+import GHUserType from './user';
+import GHRepositoryType from './repository';
 
 import { User } from '../fetch/user';
-import { Repo } from '../fetch/repo';
+import Repo from '../fetch/repo';
 
 const queryType = new GraphQLObjectType({
   name: 'Root',

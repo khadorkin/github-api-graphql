@@ -10,7 +10,7 @@ import {
 //   GHCommentType,
 // } from './comment_type';
 
-export const GHRepositoryType = new GraphQLObjectType({
+const GHRepositoryType = new GraphQLObjectType({
   name: 'Repository',
   fields: {
     id: { type: GraphQLInt },
@@ -92,3 +92,4 @@ export const GHRepositoryType = new GraphQLObjectType({
   },
 });
 
+export default GHRepositoryType;
