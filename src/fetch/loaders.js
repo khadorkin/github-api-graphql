@@ -1,22 +1,17 @@
 import DataLoader from 'dataloader';
-import fetch from 'isomorphic-fetch';
+import rp from 'request-promise-native';
 import GITHUB_BASE_URL from '../conf';
 
 function getUrl(url) {
-  return new Promise((resolve, reject) => {
-    fetch(url, {
-      method: 'get',
+  return new Promise((resolve, reject) =>
+    rp({
+      uri: url,
     })
-      .then(response => {
-        if (response.status >= 400) {
-          reject('Bad response from server');
-        }
-        return response.json();
+      .then(result => resolve(JSON.parse(result)))
+      .catch(() => {
+        reject('Bad response from server');
       })
-      .then(data => {
-        resolve(data);
-      });
-  });
+  );
 }
 function getPath(path) {
   return getUrl(`${GITHUB_BASE_URL}/${path}`);
