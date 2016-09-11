@@ -86,10 +86,11 @@ describe('User query', () => {
       mockUser('rportugal');
     });
 
-    it('returns the base fields', async() =>{
+    it('returns the base fields', async() => {
       const result = await runQuery(query);
 
-      const expected = JSON.parse(fs.readFileSync('src/test/fixtures/expected/user_query_test.json', 'utf8'));
+      const expected = JSON.parse(
+        fs.readFileSync('src/test/fixtures/expected/user_query_test.json', 'utf8'));
       expect(result).to.deep.equal(expected);
     });
 

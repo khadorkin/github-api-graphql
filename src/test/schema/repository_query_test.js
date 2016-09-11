@@ -96,7 +96,8 @@ describe('Repository query', () => {
     const result = await runQuery(query);
     expect(nock.isDone()).to.equal(true, "Didn't hit all mock endpoints!");
 
-    const expected = JSON.parse(fs.readFileSync('src/test/fixtures/expected/repository_query_test.json', 'utf8'));
+    const expected = JSON.parse(
+      fs.readFileSync('src/test/fixtures/expected/repository_query_test.json', 'utf8'));
     expect(result).to.deep.equal(expected);
   });
 });

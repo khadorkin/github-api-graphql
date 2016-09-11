@@ -19,7 +19,7 @@ import {
 //   UserFollowers,
 // } from '../fetch/user';
 
-const GHUserType = new GraphQLObjectType({
+export default new GraphQLObjectType({
   name: 'User',
   fields: () => ({
     login: { type: GraphQLString },
@@ -81,24 +81,3 @@ const GHUserType = new GraphQLObjectType({
   }),
 });
 
-/*
-export function getAuthenticatedUser(accessToken) {
-  return new Promise((resolve, reject) => {
-    let url = `${GITHUB_BASE_URL}/user`
-
-    restler.get(url, {
-      headers: { "Authorization": `Bearer ${accessToken}`}
-    }).on('complete', (result) => {
-      if (result instanceof Error) {
-        console.log(`Error: ${result.message}`);
-        reject(result);
-      } else {
-        console.log(result);
-        resolve(result);
-      }
-    });
-  });
-}
-*/
-
-export default GHUserType;

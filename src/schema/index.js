@@ -4,8 +4,8 @@ import {
   GraphQLString,
 } from 'graphql';
 
-import GHUserType from './user';
-import GHRepositoryType from './repository';
+import GHUserType from './user_type';
+import GHRepositoryType from './repository_type';
 
 import { User } from '../fetch/user';
 import Repo from '../fetch/repo';
