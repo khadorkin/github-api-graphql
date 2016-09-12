@@ -12,7 +12,7 @@ function getUrl(url) {
     })
       .then(result => resolve(JSON.parse(result)))
       .catch(err => {
-        console.log(err);
+        // console.log(err);
         reject('Bad response from server');
       })
   );

@@ -8,6 +8,7 @@ import {
   mockRepoEvents,
   mockPullRequestsRepo,
   mockRepoBranches,
+  mockIssuesRepo,
 } from '../helpers/mock';
 import createLoaders from '../../fetch/loaders';
 
@@ -113,7 +114,15 @@ describe('Loaders', () => {
   });
 
   describe('Issues', () => {
-
+    describe('Issues for a Repository', () => {
+      it('is able to fetch the issues for a repository through the loader', async() => {
+        const fullName = 'graphql/express-graphql';
+        const filename = mockIssuesRepo(fullName);
+        const result = await loaders.repoIssues.load(fullName);
+        const expectedResult = loadExpectedResult(filename);
+        expect(result).to.deep.eq(expectedResult);
+      });
+    });
   });
 
   describe('Organizations APIs', () => {
