@@ -7,7 +7,7 @@ import {
 } from 'graphql';
 
 // import {
-//   GHRepositoryType,
+//   RepositoryType,
 //   getAuthenticatedUserRepos,
 // } from './repository_type';
 
@@ -36,7 +36,7 @@ export default new GraphQLObjectType({
     organizations_url: { type: GraphQLString },
     repos_url: { type: GraphQLString },
     // repos: {
-    //   type: new GraphQLList(GHRepositoryType),
+    //   type: new GraphQLList(RepositoryType),
     //   resolve: (parentValue, _, { rootValue: { user } }) =>
     //     getAuthenticatedUserRepos(user.accessToken),
     // },
@@ -62,7 +62,7 @@ export default new GraphQLObjectType({
       resolve: parentValue => parentValue.following,
     },
     // followers: {
-    //   type: new GraphQLList(GHUserType),
+    //   type: new GraphQLList(UserType),
     //   resolve: (parentValue, _, { loaders }) => {
     //     const result = getFromURL(parentValue.followers_url);
     //     result.then(data => {
@@ -72,7 +72,7 @@ export default new GraphQLObjectType({
     //   },
     // },
     // // following: {
-    // //   type: new GraphQLList(GHUserType),
+    // //   type: new GraphQLList(UserType),
     // //   resolve: parentValue => getFromURL(parentValue.following_url),
     // // },
     created_at: { type: GraphQLString },

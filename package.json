@@ -9,7 +9,7 @@
     "build": "babel src -d build",
     "check": "flow check",
     "lint": "eslint src",
-    "start": "babel-node src/server/main.js",
+    "start": "nodemon --exec babel-node -- src/server/main.js",
     "update-schema": "babel-node ./scripts/updateSchema.js",
     "test": "npm run lint && npm run check && npm run testonly",
     "testonly": "mocha $npm_package_options_mocha"

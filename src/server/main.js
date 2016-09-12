@@ -1,7 +1,7 @@
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import githubSchema from '../schema';
-import { createLoaders } from '../fetch/loaders';
+import createLoaders from '../fetch/loaders';
 
 const session = require('express-session');
 const bodyParser = require('body-parser');

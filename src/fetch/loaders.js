@@ -6,9 +6,13 @@ function getUrl(url) {
   return new Promise((resolve, reject) =>
     rp({
       uri: url,
+      headers: {
+        'User-Agent': 'request',
+      },
     })
       .then(result => resolve(JSON.parse(result)))
-      .catch(() => {
+      .catch(err => {
+        console.log(err);
         reject('Bad response from server');
       })
   );
@@ -33,6 +37,10 @@ function getRepoBranches(fullName) {
   return getPath(`repos/${fullName}/branches`);
 }
 
+function getRepoIssues(fullName) {
+  return getPath(`repos/${fullName}/issues`);
+}
+
 function getPullRequestsRepo(fullName) {
   return getPath(`repos/${fullName}/pulls`);
 }
@@ -55,6 +63,7 @@ export default function createLoaders(/* authToken: string */): Object {
     repos: new DataLoader(ids => Promise.all(ids.map(getRepo))),
     repoEvents: new DataLoader(ids => Promise.all(ids.map(getRepoEvents))),
     repoBranches: new DataLoader(ids => Promise.all(ids.map(getRepoBranches))),
+    repoIssues: new DataLoader(ids => Promise.all(ids.map(getRepoIssues))),
     // issues: new DataLoader(ids => Promise.all(ids.map(getIssue))),
     pullRequestsRepo: new DataLoader(ids => Promise.all(ids.map(getPullRequestsRepo))),
     // comments: new DataLoader(ids => Promise.all(ids.map(getComments))),

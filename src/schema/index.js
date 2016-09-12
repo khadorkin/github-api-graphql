@@ -4,8 +4,8 @@ import {
   GraphQLString,
 } from 'graphql';
 
-import GHUserType from './user_type';
-import GHRepositoryType from './repository_type';
+import UserType from './user_type';
+import RepositoryType from './repository_type';
 
 import { User } from '../fetch/user';
 import Repo from '../fetch/repo';
@@ -14,12 +14,12 @@ const queryType = new GraphQLObjectType({
   name: 'Root',
   fields: {
     // me: {
-    //   type: GHUserType,
+    //   type: UserType,
     //   resolve: (parentValue, _, { loaders/* , user, accessToken */ }) =>
     //     AuthenticatedUser.gen(loaders, 'rportugal'),
     // },
     user: {
-      type: GHUserType,
+      type: UserType,
       args: {
         userName: { type: GraphQLString },
       },
@@ -27,7 +27,7 @@ const queryType = new GraphQLObjectType({
         User.gen(loaders, userName),
     },
     repo: {
-      type: GHRepositoryType,
+      type: RepositoryType,
       args: {
         fullName: { type: GraphQLString },
       },

@@ -3,12 +3,14 @@ import {
   GraphQLInt,
   GraphQLString,
   GraphQLBoolean,
-  // GraphQLList,
+  GraphQLList,
 } from 'graphql';
 
-// import {
-//   GHCommentType,
-// } from './comment_type';
+// import CommentType from './comment_type';
+
+import IssueType from './issue_type';
+
+import { RepoIssues } from '../fetch/repo';
 
 export default new GraphQLObjectType({
   name: 'Repository',
@@ -28,7 +30,7 @@ export default new GraphQLObjectType({
     branches_url: { type: GraphQLString },
     clone_url: { type: GraphQLString },
     // collaborators: {
-    //   type: new GraphQLList(GHUserType)
+    //   type: new GraphQLList(UserType)
     // },
     collaborators_url: { type: GraphQLString },
     // comments: {
@@ -56,6 +58,10 @@ export default new GraphQLObjectType({
     issue_comment_url: { type: GraphQLString },
     issue_events_url: { type: GraphQLString },
     issues_url: { type: GraphQLString },
+    issues: {
+      type: new GraphQLList(IssueType),
+      resolve: (parentValue, _, { loaders }) => RepoIssues.gen(loaders, parentValue.full_name),
+    },
     keys_url: { type: GraphQLString },
     labels_url: { type: GraphQLString },
     languages_url: { type: GraphQLString },
