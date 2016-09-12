@@ -4,6 +4,7 @@ import {
   GraphQLString,
   GraphQLBoolean,
   GraphQLList,
+  GraphQLEnumType,
 } from 'graphql';
 
 // import CommentType from './comment_type';
@@ -11,6 +12,15 @@ import {
 import IssueType from './issue_type';
 
 import { RepoIssues } from '../fetch/repo';
+
+const IssueStateType = new GraphQLEnumType({
+  name: 'IssueState',
+  values: {
+    OPEN: { value: 'open' },
+    CLOSED: { value: 'closed' },
+    ALL: { value: 'all' }
+  }
+});
 
 export default new GraphQLObjectType({
   name: 'Repository',
@@ -59,8 +69,13 @@ export default new GraphQLObjectType({
     issue_events_url: { type: GraphQLString },
     issues_url: { type: GraphQLString },
     issues: {
+      args: {
+        milestone: { type: GraphQLString },
+        state: { type: IssueStateType }
+      },
       type: new GraphQLList(IssueType),
-      resolve: (parentValue, _, { loaders }) => RepoIssues.gen(loaders, parentValue.full_name),
+      resolve: (parentValue, args, { loaders }) =>
+        RepoIssues.gen(loaders, parentValue.full_name, args),
     },
     keys_url: { type: GraphQLString },
     labels_url: { type: GraphQLString },

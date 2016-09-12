@@ -100,4 +100,127 @@ describe('Repository query', () => {
       fs.readFileSync('src/test/fixtures/expected/repository_query_test.json', 'utf8'));
     expect(result).to.deep.equal(expected);
   });
+
+  describe('Issues', () => {
+    it.skip('returns the base fields', async() => {
+
+    });
+
+    describe('State argument', () => {
+      it.skip('returns the open issues by default', async() => {
+        const query = `
+        {
+          repo(fullName: "graphql/express-graphql") {
+            id
+            issues {
+              id
+              state
+            }
+          }
+        }`;
+        const result = await runQuery(query);
+        expect(nock.isDone()).to.equal(true, "Didn't hit all the mock endpoints!");
+
+        const expected = JSON.parse(
+          fs.readFileSync('src/test/fixtures/expected/repository_query_test.json', 'utf8'));
+        expect(result).to.deep.equal(expected);
+      });
+
+      it.skip('returns the open issues if passing OPEN', async() => {
+
+      });
+
+      it.skip('returns the closed issues if passing CLOSED', async() => {
+
+      });
+
+      it.skip('returns all issues if passing ALL', async() => {
+
+      });
+    });
+
+    describe('Milestone argument', () => {
+      it.skip('returns a milestone by number', async() => {
+
+      });
+
+      it.skip("returns any milestone if passing '*'", async() => {
+
+      });
+
+      it.skip("returns issues without milestones if passing 'none'", async() => {
+
+      });
+    });
+
+    describe('Assignee argument', () => {
+      it.skip('returns issues assigned to a user if passing the user name', async() => {
+
+      });
+
+      it.skip("returns issues with no assigned user if passing 'none'", async() => {
+
+      });
+
+      it.skip("returns issues with no assigned user if passing '*'", async() => {
+
+      });
+    });
+
+    describe('Creator argument', () => {
+      it.skip('returns issues created by a user', async() => {
+
+      });
+    });
+
+    describe('Mentioned argument', () => {
+      it.skip('returns issues where a user is mentioned', async() => {
+
+      });
+    });
+
+    describe('Labels argument', () => {
+      it.skip('returns based on a comma separated list of label names', async() => {
+
+      });
+    });
+
+    describe('Sort argument', () => {
+      it.skip('sorts by CREATED by default', async() => {
+
+      });
+
+      it.skip('sorts by created if passing CREATED', async() => {
+
+      });
+
+      it.skip('sorts by updated if passing UPDATED', async() => {
+
+      });
+
+      it.skip('sorts by comments if passing COMMENTS', async() => {
+
+      });
+    });
+
+    describe('Direction argument', () => {
+      it.skip('sorts issues in descending order by default', async() => {
+
+      });
+
+      it.skip('can sort issues in descending order', async() => {
+
+      });
+
+      it.skip('can sort issues in ascending order', async() => {
+
+      });
+    });
+
+    describe('Since argument', () => {
+      it.skip('returns issues updated at or after a date', async() => {
+
+      });
+    });
+  });
 });

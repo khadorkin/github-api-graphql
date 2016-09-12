@@ -8,9 +8,17 @@ class Repo {
 }
 
 export class RepoIssues {
-  static async gen(loaders, fullName: string): Promise<?RepoIssues> {
-    const rawData = await loaders.repoIssues.load(fullName);
+  static async gen(loaders, fullName: string, args): Promise<?RepoIssues> {
+    let state = 'open';
+    if (args.state !== undefined) {
+      state = args.state;
+    }
+    const rawData = await loaders.repoIssues.load({ fullName: fullName, state: state });
     if (rawData === null) return null;
+
+    if (args.milestone !== undefined) {
+      // TODO
+    }
 
     return rawData;
   }

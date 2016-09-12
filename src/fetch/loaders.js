@@ -2,23 +2,25 @@ import DataLoader from 'dataloader';
 import rp from 'request-promise-native';
 import GITHUB_BASE_URL from '../conf';
 
-function getUrl(url) {
+function getUrl(url, params = {}) {
   return new Promise((resolve, reject) =>
     rp({
       uri: url,
+      qs: params,
       headers: {
         'User-Agent': 'request',
       },
     })
       .then(result => resolve(JSON.parse(result)))
-      .catch(err => {
+      .catch(() => {
         // console.log(err);
         reject('Bad response from server');
       })
   );
 }
-function getPath(path) {
-  return getUrl(`${GITHUB_BASE_URL}/${path}`);
+function getPath(path, params) {
+  const url = `${GITHUB_BASE_URL}/${path}`;
+  return getUrl(url, params);
 }
 
 function getRepo(fullName) {
@@ -37,8 +39,8 @@ function getRepoBranches(fullName) {
   return getPath(`repos/${fullName}/branches`);
 }
 
-function getRepoIssues(fullName) {
-  return getPath(`repos/${fullName}/issues`);
+function getRepoIssues(options) {
+  return getPath(`repos/${options.fullName}/issues`, { state: options.state });
 }
 
 function getPullRequestsRepo(fullName) {

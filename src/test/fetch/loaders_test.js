@@ -118,7 +118,7 @@ describe('Loaders', () => {
       it('is able to fetch the issues for a repository through the loader', async() => {
         const fullName = 'graphql/express-graphql';
         const filename = mockIssuesRepo(fullName);
-        const result = await loaders.repoIssues.load(fullName);
+        const result = await loaders.repoIssues.load({ fullName: fullName, state: 'open' });
         const expectedResult = loadExpectedResult(filename);
         expect(result).to.deep.eq(expectedResult);
       });
