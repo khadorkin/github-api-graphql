@@ -24,8 +24,7 @@ export class RepoIssues {
       // TODO
     }
 
-    // console.log('raw data');
-    // console.log(rawData);
+
     return rawData;
   }
 }

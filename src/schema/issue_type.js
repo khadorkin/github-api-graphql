@@ -5,6 +5,8 @@ import {
   GraphQLBoolean,
 } from 'graphql';
 
+import MilestoneType from './milestone_type';
+
 export default new GraphQLObjectType({
   name: 'Issue',
   fields: {
@@ -22,7 +24,7 @@ export default new GraphQLObjectType({
     // user
     // labels
     // assignee
-    // milestone
+    milestone: { type: MilestoneType },
     locked: { type: GraphQLBoolean },
     comments: { type: GraphQLInt },
     // pull_request
