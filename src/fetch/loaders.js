@@ -11,19 +11,22 @@ function getUrl(url, params = {}) {
         'User-Agent': 'request',
       },
     })
-      .then(result => resolve(JSON.parse(result)))
+      .then(result => {
+        // console.log(result);
+        resolve(JSON.parse(result));
+      })
       .catch(() => {
         // console.log(err);
         reject('Bad response from server');
       })
   );
 }
-function getPath(path, params) {
+function getPath(path: string, params) {
   const url = `${GITHUB_BASE_URL}/${path}`;
   return getUrl(url, params);
 }
 
-function getRepo(fullName) {
+function getRepo(fullName: string) {
   return getPath(`repos/${fullName}`);
 }
 
@@ -31,7 +34,7 @@ function getUser(userName: string): Object {
   return getPath(`users/${userName}`);
 }
 
-function getRepoEvents(fullName) {
+function getRepoEvents(fullName: string) {
   return getPath(`repos/${fullName}/issues/events`);
 }
 

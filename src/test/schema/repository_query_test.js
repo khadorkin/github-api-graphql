@@ -4,7 +4,10 @@ import dirtyChai from 'dirty-chai';
 import nock from 'nock';
 import fs from 'fs';
 import runQuery from '../helpers/graphql_runner';
-import { mockRepo } from '../helpers/mock';
+import {
+  mockRepo,
+  mockIssuesRepo,
+} from '../helpers/mock';
 
 chai.use(dirtyChai);
 
@@ -79,8 +82,8 @@ const baseQuery = `
 `;
 
 describe('Repository query', () => {
-  beforeEach(() => {
-    mockRepo('rportugal/opencv-zbar');
+  before(() => {
+    nock.cleanAll();
   });
 
   afterEach(() => {
@@ -93,6 +96,7 @@ describe('Repository query', () => {
   // });
 
   it('returns the base fields', async() => {
+    mockRepo('rportugal/opencv-zbar');
     const result = await runQuery(baseQuery);
     expect(nock.isDone()).to.equal(true, "Didn't hit all mock endpoints!");
 
@@ -102,40 +106,94 @@ describe('Repository query', () => {
   });
 
   describe('Issues', () => {
+    beforeEach(() => {
+      mockRepo('graphql/express-graphql');
+    });
+
     it.skip('returns the base fields', async() => {
 
     });
 
     describe('State argument', () => {
-      it.skip('returns the open issues by default', async() => {
+      it('returns the open issues by default', async() => {
         const query = `
         {
           repo(fullName: "graphql/express-graphql") {
-            id
             issues {
               id
               state
             }
           }
         }`;
+
+        mockIssuesRepo('graphql/express-graphql');
         const result = await runQuery(query);
         expect(nock.isDone()).to.equal(true, "Didn't hit all the mock endpoints!");
 
         const expected = JSON.parse(
-          fs.readFileSync('src/test/fixtures/expected/repository_query_test.json', 'utf8'));
+          fs.readFileSync('src/test/fixtures/expected/repository_query_test-issues--open.json',
+                          'utf8'));
         expect(result).to.deep.equal(expected);
       });
 
-      it.skip('returns the open issues if passing OPEN', async() => {
+      it('returns the open issues if passing OPEN', async() => {
+        const query = `
+        {
+          repo(fullName: "graphql/express-graphql") {
+            issues(state: OPEN) {
+              id
+              state
+            }
+          }
+        }`;
+        mockIssuesRepo('graphql/express-graphql', 'open');
+        const result = await runQuery(query);
+        expect(nock.isDone()).to.equal(true, "Didn't hit all the mock endpoints!");
 
+        const expected = JSON.parse(
+          fs.readFileSync('src/test/fixtures/expected/repository_query_test-issues--open.json',
+                          'utf8'));
+        expect(result).to.deep.equal(expected);
       });
 
-      it.skip('returns the closed issues if passing CLOSED', async() => {
+      it('returns the closed issues if passing CLOSED', async() => {
+        const query = `
+        {
+          repo(fullName: "graphql/express-graphql") {
+            issues(state: CLOSED) {
+              id
+              state
+            }
+          }
+        }`;
+        mockIssuesRepo('graphql/express-graphql', 'closed');
+        const result = await runQuery(query);
+        expect(nock.isDone()).to.equal(true, "Didn't hit all the mock endpoints!");
 
+        const expected = JSON.parse(
+          fs.readFileSync('src/test/fixtures/expected/repository_query_test-issues--closed.json',
+                          'utf8'));
+        expect(result).to.deep.equal(expected);
       });
 
-      it.skip('returns all issues if passing ALL', async() => {
+      it('returns all issues if passing ALL', async() => {
+        const query = `
+        {
+          repo(fullName: "graphql/express-graphql") {
+            issues(state: ALL) {
+              id
+              state
+            }
+          }
+        }`;
+        mockIssuesRepo('graphql/express-graphql', 'all');
+        const result = await runQuery(query);
+        expect(nock.isDone()).to.equal(true, "Didn't hit all the mock endpoints!");
 
+        const expected = JSON.parse(
+          fs.readFileSync('src/test/fixtures/expected/repository_query_test-issues--all.json',
+            'utf8'));
+        expect(result).to.deep.equal(expected);
       });
     });
 

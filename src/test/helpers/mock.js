@@ -6,16 +6,18 @@ function fixRepoFullName(fullName) {
   return fullName.replace(/\//g, '--');
 }
 
-function mockReplyWithFilename(regex, filename) {
-  nock(`${GITHUB_BASE_URL}`)
+function mockReplyWithFilename(regex, filename, queryParams = {}) {
+  const interceptor = nock(`${GITHUB_BASE_URL}`)
     .persist()
     .intercept(new RegExp(regex), 'GET')
-    .times(1)
-    .replyWithFile(200, filename);
+    .times(1);
+
+  interceptor.query(queryParams);
+  interceptor.replyWithFile(200, filename);
 }
 
 export function mockUserNotFound(userName) {
-  const regexStr = `users\/${userName}`;
+  const regexStr = `\/users\/${userName}`;
   nock(`${GITHUB_BASE_URL}`)
     .persist()
     .intercept(new RegExp(regexStr), 'GET')
@@ -24,7 +26,7 @@ export function mockUserNotFound(userName) {
 }
 
 export function mockUser(userName) {
-  const regexStr = `users\/${userName}`;
+  const regexStr = `\/users\/${userName}`;
   const responseFilename = `src/test/fixtures/user_${userName}.json`;
   mockReplyWithFilename(regexStr, responseFilename);
   return responseFilename;
@@ -32,7 +34,7 @@ export function mockUser(userName) {
 
 export function mockRepo(fullName) {
   const fullNameFixed = fixRepoFullName(fullName);
-  const regexStr = `/repos/${fullName}`;
+  const regexStr = `\/repos\/${fullName}$`;
   const responseFilename = `src/test/fixtures/repo_${fullNameFixed}.json`;
   mockReplyWithFilename(regexStr, responseFilename);
 
@@ -41,7 +43,7 @@ export function mockRepo(fullName) {
 
 export function mockRepoEvents(fullName) {
   const fullNameFixed = fixRepoFullName(fullName);
-  const regexStr = `/repos/${fullName}/issues/events`;
+  const regexStr = `\/repos\/${fullName}\/issues\/events`;
   const responseFilename = `src/test/fixtures/issues_repo_events_${fullNameFixed}.json`;
   mockReplyWithFilename(regexStr, responseFilename);
 
@@ -50,20 +52,26 @@ export function mockRepoEvents(fullName) {
 
 export function mockRepoBranches(fullName) {
   const fullNameFixed = fixRepoFullName(fullName);
-  const regexStr = `/repos/${fullName}/branches`;
+  const regexStr = `\/repos\/${fullName}\/branches`;
   const responseFilename = `src/test/fixtures/repo_branches_${fullNameFixed}.json`;
   mockReplyWithFilename(regexStr, responseFilename);
 
   return responseFilename;
 }
 
-export function mockIssuesRepo(fullName) {
+export function mockIssuesRepo(fullName, modifier = 'open') {
   const fullNameFixed = fixRepoFullName(fullName);
-  const regexStr = `/repos/${fullName}/issues`;
-  const responseFilename = `src/test/fixtures/issues_repo_${fullNameFixed}.json`;
-  mockReplyWithFilename(regexStr, responseFilename);
+  const regexStr = `\/repos\/${fullName}\/issues`;
+  const queryParams = {};
+  let suffix = '';
+  if (modifier) {
+    suffix = `--${modifier}`;
+    queryParams.state = modifier;
+  }
+  const filename = `src/test/fixtures/issues_repo_${fullNameFixed}${suffix}.json`;
+  mockReplyWithFilename(regexStr, filename, queryParams);
 
-  return responseFilename;
+  return filename;
 }
 
 export function mockPullRequestsRepo(fullName) {
