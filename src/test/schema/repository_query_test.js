@@ -8,7 +8,7 @@ import { mockRepo } from '../helpers/mock';
 
 chai.use(dirtyChai);
 
-const query = `
+const baseQuery = `
 {
   repo(fullName: "rportugal/opencv-zbar") {
     id
@@ -93,7 +93,7 @@ describe('Repository query', () => {
   // });
 
   it('returns the base fields', async() => {
-    const result = await runQuery(query);
+    const result = await runQuery(baseQuery);
     expect(nock.isDone()).to.equal(true, "Didn't hit all mock endpoints!");
 
     const expected = JSON.parse(

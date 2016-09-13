@@ -18,8 +18,8 @@ const IssueStateType = new GraphQLEnumType({
   values: {
     OPEN: { value: 'open' },
     CLOSED: { value: 'closed' },
-    ALL: { value: 'all' }
-  }
+    ALL: { value: 'all' },
+  },
 });
 
 export default new GraphQLObjectType({
@@ -71,7 +71,7 @@ export default new GraphQLObjectType({
     issues: {
       args: {
         milestone: { type: GraphQLString },
-        state: { type: IssueStateType }
+        state: { type: IssueStateType },
       },
       type: new GraphQLList(IssueType),
       resolve: (parentValue, args, { loaders }) =>

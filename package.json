@@ -12,7 +12,7 @@
     "start": "nodemon --exec babel-node -- src/server/main.js",
     "update-schema": "babel-node ./scripts/updateSchema.js",
     "test": "npm run lint && npm run check && npm run testonly",
-    "testonly": "mocha $npm_package_options_mocha --watch"
+    "testonly": "mocha $npm_package_options_mocha"
   },
   "author": "",
   "license": "ISC",

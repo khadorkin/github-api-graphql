@@ -8,12 +8,16 @@ class Repo {
 }
 
 export class RepoIssues {
-  static async gen(loaders, fullName: string, args): Promise<?RepoIssues> {
-    let state = 'open';
+  static async gen(loaders, repoFullName: string, args): Promise<?RepoIssues> {
+    let issueState = 'open';
     if (args.state !== undefined) {
-      state = args.state;
+      issueState = args.state;
     }
-    const rawData = await loaders.repoIssues.load({ fullName: fullName, state: state });
+    const id = {
+      fullName: repoFullName,
+      state: issueState,
+    };
+    const rawData = await loaders.repoIssues.load(id);
     if (rawData === null) return null;
 
     if (args.milestone !== undefined) {
